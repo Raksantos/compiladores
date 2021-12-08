@@ -104,6 +104,30 @@ public class LexicalScanner {
         return this.position == line.length();
     }
 
+    private boolean isDelimiter(char c){
+        return (c == ',') || (c == ';') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '"');
+    }
+
+    private boolean isArithmeticOperator(char c){
+        return (c == '+') || (c == '-') || (c == '*') || (c == '/') || (c == '^') || (c == '%');
+    }
+
+    private boolean isRelationalOperator(char c){
+        return (c == '<') || (c == '>');
+    }
+
+    private boolean isNOTOperator(char c) {
+        return (c == '!');
+    }
+
+    private boolean isANDOperator(char c) {
+        return (c == '&');
+    }
+
+    private boolean isOROperator(char c) {
+        return (c == '|');
+    }
+
     private char getCurrentChar(String line) { 
         return line.charAt(this.position); 
     }
@@ -124,10 +148,10 @@ public class LexicalScanner {
         this.position = 0;
     }
 
-    // private boolean isSymbol(char c) {
-    //     return (c == '>') || (c == '<') || (c == '=') || (c == '!') || (c == '&') || (c == '|') || (c == '+')
-    //             || (c == '-') || (c == '^') || (c == '*') || (c == '/') || (c == '%') || (c == ' ') || (c == ';') || (c == '.') || (c == ',') || (c == ':') || (c == '?') || (c == '_') || (c == '@') || (c == '#') || (c == '$') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}');
-    // }
+    private boolean isSymbol(char c) {
+        return (c == '>') || (c == '<') || (c == '=') || (c == '!') || (c == '&') || (c == '|') || (c == '+')
+                || (c == '-') || (c == '^') || (c == '*') || (c == '/') || (c == '%') || (c == ' ') || (c == ';') || (c == '.') || (c == ',') || (c == ':') || (c == '?') || (c == '_') || (c == '@') || (c == '#') || (c == '$') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}');
+    }
 
     public void nextColumn(){
         this.column = this.position;    
