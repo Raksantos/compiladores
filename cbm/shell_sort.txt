@@ -1,0 +1,63 @@
+function void shellSort(int array[], int n)
+{
+	int h = 1, c , j;
+
+	while(h < n) 
+    {
+		h = h*3 + 1;
+	}
+
+	h = h/3;
+
+	while(h > 0)
+    {
+	    for(int i, h, n, 1)
+        {
+			c = array[i];
+			j = i;
+
+			while(j >= h && array[j - h] > c)
+            {
+				array [j] = array[j - h]; 
+				j = j - h;
+			}
+
+			array [j]  = c;
+		}
+
+		h = h/2;
+	}
+}
+	
+function int main() 
+{
+	int n;
+	write("Digite o tamanho do Array: ");
+	input(n);
+
+	int array[n];
+
+	write("Digite os numeros que serao ordenados: ");
+	for(int i, 0, n, 1)
+    {
+		write(array[i]);
+	}
+		
+	write("Os valores digitados foram: ");
+	for(int i, 0, n, 1)
+    {
+		int a = array[i];
+		write(a);
+	}
+	
+	shellSort(array, n);
+	
+	write("Valores ordenados: ");
+	for(int i, 0 , n, 1)
+    {
+		int b = array[i];
+		write(b);
+	}
+
+	return 0; 
+}
