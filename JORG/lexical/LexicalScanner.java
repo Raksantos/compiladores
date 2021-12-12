@@ -1,4 +1,4 @@
-package cbm.lexical;
+package JORG.lexical;
 
 import java.util.Hashtable;
 

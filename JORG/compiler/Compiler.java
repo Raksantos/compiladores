@@ -1,12 +1,12 @@
-package cbm.compiler;
+package JORG.compiler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import cbm.lexical.LexicalScanner;
-import cbm.lexical.Token;
-import cbm.lexical.TokenClass;
+import JORG.lexical.LexicalScanner;
+import JORG.lexical.Token;
+import JORG.lexical.TokenClass;
 
 public class Compiler {
     public static void main(String args[]) throws FileNotFoundException {
