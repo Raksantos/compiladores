@@ -88,7 +88,7 @@ public class LexicalScanner {
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
                             state = 19;
-                        }else if(current == '.'){
+                        }else if(current == ':'){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
                             state = 22;
@@ -317,7 +317,7 @@ public class LexicalScanner {
         tokenTable.put(";", TokenClass.TERMINAL);
         tokenTable.put(",", TokenClass.SEP);
         tokenTable.put("\"", TokenClass.ASPAS);
-        tokenTable.put("#", TokenClass.EOF_TOKEN);
+        tokenTable.put("", TokenClass.EOF_TOKEN);
 
         // Constantes literais
 
@@ -338,6 +338,7 @@ public class LexicalScanner {
         tokenTable.put("<=", TokenClass.OP_MENOR_IG);
         tokenTable.put("!=", TokenClass.OP_N_IGUAL);
         tokenTable.put("=", TokenClass.OP_ATR);
+        tokenTable.put(":", TokenClass.OP_CONCAT);
     }
 
     private boolean isDigit(char c){
@@ -381,7 +382,7 @@ public class LexicalScanner {
     }
 
     private boolean isDelimiter(char c){
-        return (c == ',') || (c == ';') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}') || (c == '"');
+        return (c == ',') || (c == ';') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}');
     }
 
     private boolean isArithmeticOperator(char c){
@@ -421,7 +422,8 @@ public class LexicalScanner {
     }
 
     public boolean isSymbol(char c){
-        return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c);
+        return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c) || isSpace(c)
+                || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || (c == ':');
     }
 
     public int getRow(){

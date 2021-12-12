@@ -16,7 +16,7 @@ function void shellSort(int array[], int n)
 			c = array[i];
 			j = i;
 
-			while(j >= h && array[j - h] > c)
+			while(j >= h & array[j - h] > c)
             {
 				array [j] = array[j - h]; 
 				j = j - h;
@@ -29,7 +29,7 @@ function void shellSort(int array[], int n)
 	}
 }
 	
-function int main() 
+function void main() 
 {
 	int n;
 	write("Digite o tamanho do Array: ");
@@ -58,6 +58,4 @@ function int main()
 		int b = array[i];
 		write(b);
 	}
-
-	return 0; 
 }
