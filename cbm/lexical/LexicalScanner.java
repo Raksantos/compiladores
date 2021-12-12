@@ -79,6 +79,24 @@ public class LexicalScanner {
                             nextColumn();
                             state = 0;
                         }
+                        else if(isSimpleQuote(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 15;
+                        }
+                        else if(isDoubleQuote(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 19;
+                        }else if(current == '.'){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 22;
+                        }else if(isSpace(current) || isNewLine(current) || isTab(current)){
+                            nextChar();
+                            nextColumn();
+                            state = 0;
+                        }
                         else {
                             currentTokenValue = currentTokenValue + current;
                             nextChar();
@@ -189,6 +207,74 @@ public class LexicalScanner {
                         return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
                     case 14:
                         return null;
+                    case 15:
+                        if(isChar(current) || isDigit(current) || isSymbol(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 16;
+                        }else if(current == '\\'){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 17;
+                        }else if(isSimpleQuote(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 18;
+                        }else{
+                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                        }
+                        break;
+                    case 16:
+                        if(isSimpleQuote(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 18;
+                        }else{
+                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                        }
+                        break;
+                    case 17:
+                        if(isNewLine(current)){
+                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                        }else{
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 16; 
+                        }
+                        break;
+                    case 18:
+                        return new Token(currentTokenValue, TokenClass.CONST_CHAR, row, column);
+                    case 19:
+                        if(isChar(current) || isDigit(current) || isSymbol(current)) {
+                            currentTokenValue = currentTokenValue + current;
+                            nextChar();
+                            state = 19;
+                        }
+                        else if(current == '\\'){
+                            currentTokenValue = currentTokenValue + current;
+                            nextChar();
+                            state = 20;
+                        }else if(isDoubleQuote(current)){
+                            currentTokenValue = currentTokenValue + current;
+                            nextChar();
+                            state = 21;
+                        }else{
+                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                        }
+                        break;
+                    case 20:
+                        if(isNewLine(current)){
+                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                        }else{
+                            currentTokenValue = currentTokenValue + current;
+                            nextChar();
+                            state = 19;
+                        }
+                        break;
+                    case 21:
+                        return new Token(currentTokenValue, TokenClass.CONST_STRING, row, column);
+                    case 22:
+                        return new Token(currentTokenValue, TokenClass.OP_CONCAT, row, column);
                 }
             }
         } catch(Exception e){
@@ -270,8 +356,20 @@ public class LexicalScanner {
         return c == ' ';
     }
 
+    private boolean isSimpleQuote(char c){
+        return c == '\'';
+    }
+
+    private boolean isDoubleQuote(char c){
+        return c == '\"';
+    }
+
     private boolean isNewLine(char c){
         return c == '\n';
+    }
+
+    private boolean isTab(char c){
+        return c == '\t';
     }
 
     private boolean isUnderline(char c){
@@ -322,9 +420,9 @@ public class LexicalScanner {
         this.position++; 
     }
 
-    // public boolean isSymbol(char c){
-
-    // }
+    public boolean isSymbol(char c){
+        return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c);
+    }
 
     public int getRow(){
         return this.row;
