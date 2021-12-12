@@ -302,11 +302,6 @@ public class LexicalScanner {
     private boolean isEqualOrAssignment(char c) {
         return c == '=';
     }
-    
-    // private boolean isSymbol(char c){
-    //     return (c == '>') || (c == '<') || (c == '=') || (c == '!') || (c == '&') || (c == '|') || (c == '+')
-    //     || (c == '-') || (c == '^') || (c == '*') || (c == '/') || (c == '%') || (c == ' ') || (c == ';') || (c == '.') || (c == ',') || (c == ':') || (c == '?') || (c == '_') || (c == '@') || (c == '#') || (c == '$') || (c == '(') || (c == ')') || (c == '[') || (c == ']') || (c == '{') || (c == '}');
-    // }
 
     private char getCurrentChar(String line) { 
         return line.charAt(this.position); 

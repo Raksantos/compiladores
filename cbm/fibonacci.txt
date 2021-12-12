@@ -1,7 +1,6 @@
 function void fibonacci(int n) 
 {
 	int n1 = 0, n2 = 1, n3;
-
 	if(n == 0)
     {
         write("%d", n);
@@ -14,29 +13,23 @@ function void fibonacci(int n)
     {
 		string sep = ",";
 		write("0, 1, ");
-
 		while(true)
         {
 			n3 = n1 + n2;
-			print("%s%d", sep, n3);
-
+			write("%s%d", sep, n3);
 			if (n3 >= n)
             {
 				return;
 			}
-
 			n1 = n2;
 			n2 = n3;
 		}
 	}
 }
-
 function int main()
 {
 	int n;
 	input(n);
-
 	fibonacci(n);
-
 	return 0;
 }
