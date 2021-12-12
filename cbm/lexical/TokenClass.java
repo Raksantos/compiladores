@@ -20,6 +20,7 @@ public enum TokenClass{
     OP_MENOR_IG,
     OP_N_IGUAL,
     OP_ATR,
+    OP_CONCAT,
 
     // Delimitadores
     ABRE_PAR,

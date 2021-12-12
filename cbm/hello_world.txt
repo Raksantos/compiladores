@@ -1,3 +1,3 @@
 function void main() {
-    write("Hello World!");
+    write("Hello World!"); #teste de comentario
 }

@@ -69,6 +69,11 @@ public class LexicalScanner {
                             nextChar();
                             state = 13;
                         }
+                        else if(isComment(current)){
+                            currentTokenValue = getNextTokenValue(currentTokenValue, current);
+                            nextChar();
+                            state = 14;
+                        }
                         else if(isSpace(current) || isNewLine(current)){
                             nextChar();
                             nextColumn();
@@ -182,6 +187,8 @@ public class LexicalScanner {
                         return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
                     case 13:
                         return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                    case 14:
+                        return null;
                 }
             }
         } catch(Exception e){
@@ -251,6 +258,10 @@ public class LexicalScanner {
         return c >= '0' && c <= '9';
     }
 
+    private boolean isComment(char c){
+        return c == '#';
+    }
+
     private boolean isChar(char c) {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'); 
     }
@@ -310,6 +321,10 @@ public class LexicalScanner {
     private void nextChar() { 
         this.position++; 
     }
+
+    // public boolean isSymbol(char c){
+
+    // }
 
     public int getRow(){
         return this.row;
