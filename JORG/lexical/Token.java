@@ -2,13 +2,13 @@ package JORG.lexical;
 
 public class Token {
     private final String tokenValue;
-    private final TokenClass tokenClass;
+    private final TokenCategory tokenCategory;
     private final int tokenRow;
     private final int tokenColumn;
     
-    public Token(String tokenValue, TokenClass tokenClass, int tokenRow, int tokenColumn){
+    public Token(String tokenValue, TokenCategory tokenCategory, int tokenRow, int tokenColumn){
         this.tokenValue = tokenValue;
-        this.tokenClass = tokenClass;
+        this.tokenCategory = tokenCategory;
         this.tokenRow = tokenRow;
         this.tokenColumn = tokenColumn;
     }
@@ -17,8 +17,8 @@ public class Token {
         return tokenValue;
     }
 
-    public TokenClass getTokenClass() {
-        return tokenClass;
+    public TokenCategory getTokenCategory() {
+        return tokenCategory;
     }
 
     public int getTokenRow() {
@@ -32,6 +32,6 @@ public class Token {
     @Override
     public String toString() {
         String format = "              [%04d, %04d] (%04d, %20s) {%s}";
-        return String.format(format, tokenRow, tokenColumn, tokenClass.ordinal(), tokenClass.toString(), tokenValue);
+        return String.format(format, tokenRow, tokenColumn, tokenCategory.getNumericCode(), tokenCategory.toString(), tokenValue);
     }
 }

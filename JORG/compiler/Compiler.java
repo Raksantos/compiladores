@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import JORG.lexical.LexicalScanner;
 import JORG.lexical.Token;
-import JORG.lexical.TokenClass;
+import JORG.lexical.TokenCategory;
 
 public class Compiler {
     public static void main(String args[]) throws FileNotFoundException {
@@ -44,7 +44,7 @@ public class Compiler {
 
             lineRow = "%04d   ";
             System.out.println(String.format(lineRow, lexicalScanner.getRow()));
-            Token EOFToken = new Token("EOF", TokenClass.EOF_TOKEN, lexicalScanner.getRow(), lexicalScanner.getColumn());
+            Token EOFToken = new Token("EOF", TokenCategory.EOF_TOKEN, lexicalScanner.getRow(), lexicalScanner.getColumn());
             System.out.println(EOFToken.toString());
 
             scanner.close();

@@ -3,14 +3,14 @@ package JORG.lexical;
 import java.util.Hashtable;
 
 public class LexicalScanner {
-    Hashtable<String, TokenClass> tokenTable = new Hashtable<String, TokenClass>();
+    Hashtable<String, TokenCategory> tokenTable = new Hashtable<String, TokenCategory>();
 
     private int position = 0;
     private int row = 1;
     private int column = 0;
 
     public LexicalScanner(){
-        fillTokenClasses();
+        fillTokenCategories();
     }
 
     public Token nextToken(String line){
@@ -100,7 +100,7 @@ public class LexicalScanner {
                         else {
                             currentTokenValue = currentTokenValue + current;
                             nextChar();
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 1:
@@ -109,7 +109,7 @@ public class LexicalScanner {
                             nextChar();
                             state = 1;
                         }else{
-                            return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                            return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                         }
                         break;
                     case 2:
@@ -124,7 +124,7 @@ public class LexicalScanner {
                             state = 3;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.CONST_INT, row, column);
+                            return new Token(currentTokenValue, TokenCategory.CONST_INT, row, column);
                         }
                         break;
                     case 3:
@@ -134,7 +134,7 @@ public class LexicalScanner {
                             state = 4;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 4:
@@ -144,11 +144,11 @@ public class LexicalScanner {
                             state = 4;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.CONST_FLOAT, row, column);
+                            return new Token(currentTokenValue, TokenCategory.CONST_FLOAT, row, column);
                         }
                         break;
                     case 5:
-                        return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                        return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                     case 6:
                         if(isEqualOrAssignment(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
@@ -156,7 +156,7 @@ public class LexicalScanner {
                             state = 8;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.OP_ATR, row, column);
+                            return new Token(currentTokenValue, TokenCategory.OP_ATR, row, column);
                         }
                         break;
                     case 7:
@@ -166,11 +166,11 @@ public class LexicalScanner {
                             state = 8;
                         }
                         else{
-                            return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                            return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                         }
                         break;
                     case 8:
-                        return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                        return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                     case 9:
                         if(isEqualOrAssignment(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
@@ -178,7 +178,7 @@ public class LexicalScanner {
                             state = 8;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.OP_NOT, row, column);
+                            return new Token(currentTokenValue, TokenCategory.OP_NOT, row, column);
                         }
                         break;
                     case 10:
@@ -188,7 +188,7 @@ public class LexicalScanner {
                             state = 12;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 11:
@@ -198,13 +198,13 @@ public class LexicalScanner {
                             state = 12;
                         }
                         else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 12:
-                        return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                        return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                     case 13:
-                        return new Token(currentTokenValue, checkTokenClasses(currentTokenValue), row, column);
+                        return new Token(currentTokenValue, checkTokenCategories(currentTokenValue), row, column);
                     case 14:
                         return null;
                     case 15:
@@ -221,7 +221,7 @@ public class LexicalScanner {
                             nextChar();
                             state = 18;
                         }else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 16:
@@ -230,12 +230,12 @@ public class LexicalScanner {
                             nextChar();
                             state = 18;
                         }else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 17:
                         if(isNewLine(current)){
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }else{
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
@@ -243,7 +243,7 @@ public class LexicalScanner {
                         }
                         break;
                     case 18:
-                        return new Token(currentTokenValue, TokenClass.CONST_CHAR, row, column);
+                        return new Token(currentTokenValue, TokenCategory.CONST_CHAR, row, column);
                     case 19:
                         if(isChar(current) || isDigit(current) || isSymbol(current)) {
                             currentTokenValue = currentTokenValue + current;
@@ -259,12 +259,12 @@ public class LexicalScanner {
                             nextChar();
                             state = 21;
                         }else{
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }
                         break;
                     case 20:
                         if(isNewLine(current)){
-                            return new Token(currentTokenValue, TokenClass.BAD_TOKEN, row, column);
+                            return new Token(currentTokenValue, TokenCategory.BAD_TOKEN, row, column);
                         }else{
                             currentTokenValue = currentTokenValue + current;
                             nextChar();
@@ -272,9 +272,9 @@ public class LexicalScanner {
                         }
                         break;
                     case 21:
-                        return new Token(currentTokenValue, TokenClass.CONST_STRING, row, column);
+                        return new Token(currentTokenValue, TokenCategory.CONST_STRING, row, column);
                     case 22:
-                        return new Token(currentTokenValue, TokenClass.OP_CONCAT, row, column);
+                        return new Token(currentTokenValue, TokenCategory.OP_CONCAT, row, column);
                 }
             }
         } catch(Exception e){
@@ -287,58 +287,57 @@ public class LexicalScanner {
         return currentTokenValue + currentChar;
     }
 
-    private void fillTokenClasses(){
+    private void fillTokenCategories(){
         // Reserved Words
-        tokenTable.put("function", TokenClass.PR_FUNCTION);
-        tokenTable.put("main", TokenClass.PR_MAIN);
-        tokenTable.put("write", TokenClass.PR_WRITE);
-        tokenTable.put("procedure", TokenClass.PR_PROCEDURE);
-        tokenTable.put("return", TokenClass.PR_RETURN);
-        tokenTable.put("print", TokenClass.PR_PRINT);
-        tokenTable.put("input", TokenClass.PR_INPUT);
-        tokenTable.put("if", TokenClass.PR_IF);
-        tokenTable.put("else", TokenClass.PR_ELSE);
-        tokenTable.put("for", TokenClass.PR_FOR);
-        tokenTable.put("while", TokenClass.PR_WHILE);
-        tokenTable.put("int", TokenClass.TIPO_INT);
-        tokenTable.put("float", TokenClass.TIPO_FLOAT);
-        tokenTable.put("char", TokenClass.TIPO_CHAR);
-        tokenTable.put("string", TokenClass.TIPO_STRING);
-        tokenTable.put("bool", TokenClass.TIPO_BOOL);
-        tokenTable.put("void", TokenClass.TIPO_VOID);
+        tokenTable.put("function", TokenCategory.PR_FUNCTION);
+        tokenTable.put("main", TokenCategory.PR_MAIN);
+        tokenTable.put("write", TokenCategory.PR_WRITE);
+        tokenTable.put("input", TokenCategory.PR_INPUT);
+        tokenTable.put("procedure", TokenCategory.PR_PROCEDURE);
+        tokenTable.put("return", TokenCategory.PR_RETURN);
+        tokenTable.put("if", TokenCategory.PR_IF);
+        tokenTable.put("else", TokenCategory.PR_ELSE);
+        tokenTable.put("for", TokenCategory.PR_FOR);
+        tokenTable.put("while", TokenCategory.PR_WHILE);
+        tokenTable.put("int", TokenCategory.TIPO_INT);
+        tokenTable.put("float", TokenCategory.TIPO_FLOAT);
+        tokenTable.put("char", TokenCategory.TIPO_CHAR);
+        tokenTable.put("string", TokenCategory.TIPO_STRING);
+        tokenTable.put("bool", TokenCategory.TIPO_BOOL);
+        tokenTable.put("void", TokenCategory.TIPO_VOID);
 
         // Delimiters
-        tokenTable.put("(", TokenClass.ABRE_PAR);
-        tokenTable.put(")", TokenClass.FECHA_PAR);
-        tokenTable.put("{", TokenClass.ABRE_CHAVE);
-        tokenTable.put("}", TokenClass.FECHA_CHAVE);
-        tokenTable.put("[", TokenClass.ABRE_COL);
-        tokenTable.put("]", TokenClass.FECHA_COL);
-        tokenTable.put(";", TokenClass.TERMINAL);
-        tokenTable.put(",", TokenClass.SEP);
-        tokenTable.put("\"", TokenClass.ASPAS);
-        tokenTable.put("", TokenClass.EOF_TOKEN);
+        tokenTable.put("(", TokenCategory.ABRE_PAR);
+        tokenTable.put(")", TokenCategory.FECHA_PAR);
+        tokenTable.put("{", TokenCategory.ABRE_CHAVE);
+        tokenTable.put("}", TokenCategory.FECHA_CHAVE);
+        tokenTable.put("[", TokenCategory.ABRE_COL);
+        tokenTable.put("]", TokenCategory.FECHA_COL);
+        tokenTable.put(";", TokenCategory.TERMINAL);
+        tokenTable.put(",", TokenCategory.SEP);
+        tokenTable.put("\"", TokenCategory.ASPAS);
+        tokenTable.put("", TokenCategory.EOF_TOKEN);
 
         // Constantes literais
 
         // Operadores
-        tokenTable.put("+", TokenClass.OP_ADD);
-        tokenTable.put("-", TokenClass.OP_SUB);
-        tokenTable.put("*", TokenClass.OP_MULT);
-        tokenTable.put("/", TokenClass.OP_DIV);
-        tokenTable.put("^", TokenClass.OP_POT);
-        tokenTable.put("%", TokenClass.OP_MOD);
-        tokenTable.put("!", TokenClass.OP_NOT);
-        tokenTable.put("|", TokenClass.OP_OR);
-        tokenTable.put("&", TokenClass.OP_AND);
-        tokenTable.put(">", TokenClass.OP_MAIOR);
-        tokenTable.put("<", TokenClass.OP_MENOR);
-        tokenTable.put("==", TokenClass.OP_IGUAL);
-        tokenTable.put(">=", TokenClass.OP_MAIOR_IG);
-        tokenTable.put("<=", TokenClass.OP_MENOR_IG);
-        tokenTable.put("!=", TokenClass.OP_N_IGUAL);
-        tokenTable.put("=", TokenClass.OP_ATR);
-        tokenTable.put(":", TokenClass.OP_CONCAT);
+        tokenTable.put("+", TokenCategory.OP_ADD);
+        tokenTable.put("-", TokenCategory.OP_SUB);
+        tokenTable.put("*", TokenCategory.OP_MULT);
+        tokenTable.put("/", TokenCategory.OP_DIV);
+        tokenTable.put("^", TokenCategory.OP_POT);
+        tokenTable.put("%", TokenCategory.OP_MOD);
+        tokenTable.put("!", TokenCategory.OP_NOT);
+        tokenTable.put("|", TokenCategory.OP_OR);
+        tokenTable.put("&", TokenCategory.OP_AND);
+        tokenTable.put(">", TokenCategory.OP_MAIOR);
+        tokenTable.put("<", TokenCategory.OP_MENOR);
+        tokenTable.put("==", TokenCategory.OP_IGUAL);
+        tokenTable.put(">=", TokenCategory.OP_MAIOR_IG);
+        tokenTable.put("<=", TokenCategory.OP_MENOR_IG);
+        tokenTable.put("!=", TokenCategory.OP_N_IGUAL);
+        tokenTable.put("=", TokenCategory.OP_ATR);
+        tokenTable.put(":", TokenCategory.OP_CONCAT);
     }
 
     private boolean isDigit(char c){
@@ -423,7 +422,8 @@ public class LexicalScanner {
 
     public boolean isSymbol(char c){
         return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c) || isSpace(c)
-                || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || (c == ':');
+                || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || (c == ':') || (c == '?') || (c == '$')
+                || (c == '@') || (c == '~');
     }
 
     public int getRow(){
@@ -446,11 +446,11 @@ public class LexicalScanner {
         this.row++;
     }
 
-    private TokenClass checkTokenClasses(String tokenValue){
+    private TokenCategory checkTokenCategories(String tokenValue){
         if(tokenTable.containsKey(tokenValue)){
             return tokenTable.get(tokenValue);
         }else{
-            return TokenClass.ID;
+            return TokenCategory.ID;
         }
     }
 
