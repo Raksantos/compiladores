@@ -292,12 +292,14 @@ public class LexicalScanner {
         tokenTable.put("function", TokenCategory.PR_FUNCTION);
         tokenTable.put("main", TokenCategory.PR_MAIN);
         tokenTable.put("write", TokenCategory.PR_WRITE);
+        tokenTable.put("writeln", TokenCategory.PR_WRITELN);
         tokenTable.put("input", TokenCategory.PR_INPUT);
         tokenTable.put("return", TokenCategory.PR_RETURN);
         tokenTable.put("if", TokenCategory.PR_IF);
         tokenTable.put("else", TokenCategory.PR_ELSE);
         tokenTable.put("for", TokenCategory.PR_FOR);
         tokenTable.put("while", TokenCategory.PR_WHILE);
+        tokenTable.put("break", TokenCategory.PR_BREAK);
         tokenTable.put("int", TokenCategory.TIPO_INT);
         tokenTable.put("float", TokenCategory.TIPO_FLOAT);
         tokenTable.put("char", TokenCategory.TIPO_CHAR);
