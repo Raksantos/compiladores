@@ -293,7 +293,6 @@ public class LexicalScanner {
         tokenTable.put("main", TokenCategory.PR_MAIN);
         tokenTable.put("write", TokenCategory.PR_WRITE);
         tokenTable.put("input", TokenCategory.PR_INPUT);
-        tokenTable.put("procedure", TokenCategory.PR_PROCEDURE);
         tokenTable.put("return", TokenCategory.PR_RETURN);
         tokenTable.put("if", TokenCategory.PR_IF);
         tokenTable.put("else", TokenCategory.PR_ELSE);
@@ -319,6 +318,8 @@ public class LexicalScanner {
         tokenTable.put("", TokenCategory.EOF_TOKEN);
 
         // Constantes literais
+        tokenTable.put("true", TokenCategory.CONST_BOOL);
+        tokenTable.put("false", TokenCategory.CONST_BOOL);
 
         // Operadores
         tokenTable.put("+", TokenCategory.OP_ADD);
@@ -338,6 +339,7 @@ public class LexicalScanner {
         tokenTable.put("!=", TokenCategory.OP_N_IGUAL);
         tokenTable.put("=", TokenCategory.OP_ATR);
         tokenTable.put(":", TokenCategory.OP_CONCAT);
+        tokenTable.put("size", TokenCategory.OP_SIZE);
     }
 
     private boolean isDigit(char c){
@@ -423,7 +425,7 @@ public class LexicalScanner {
     public boolean isSymbol(char c){
         return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c) || isSpace(c)
                 || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || (c == ':') || (c == '?') || (c == '$')
-                || (c == '@') || (c == '~');
+                || (c == '@') || (c == '~') || (c == '´') || (c == '`');
     }
 
     public int getRow(){

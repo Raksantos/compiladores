@@ -1,10 +1,10 @@
 function void shellSort(int array[], int n)
 {
-	int h = 1, c , j;
+	int h = 1, c, j;
 
 	while(h < n) 
     {
-		h = h*3 + 1;
+		h = h * 3 + 1;
 	}
 
 	h = h/3;
@@ -44,18 +44,18 @@ function void main()
 	}
 		
 	write("Os valores digitados foram: ");
-	for(int i, 0, n, 1)
+	for(int j, 0, n, 1)
     {
-		int a = array[i];
+		int a = array[j];
 		write(a);
 	}
 	
 	shellSort(array, n);
 	
 	write("Valores ordenados: ");
-	for(int i, 0 , n, 1)
+	for(int k, 0 , n, 1)
     {
-		int b = array[i];
+		int b = array[k];
 		write(b);
 	}
 }
