@@ -424,8 +424,9 @@ public class LexicalScanner {
 
     public boolean isSymbol(char c){
         return isDelimiter(c) || isArithmeticOperator(c) || isRelationalOperator(c) || isComment(c) || isSpace(c)
-                || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || (c == ':') || (c == '?') || (c == '$')
-                || (c == '@') || (c == '~') || (c == '´') || (c == '`');
+                || isANDOperator(c) || isOROperator(c) || isNOTOperator(c) || isDot(c) || isEqualOrAssignment(c)
+                || isSimpleQuote(c) || isUnderline(c) || (c == ':') || (c == '?') || (c == '$') || (c == '@')
+                || (c == '~') || (c == '´') || (c == '`') || (c == '$') || (c == '\\');
     }
 
     public int getRow(){
