@@ -16,11 +16,11 @@ function void fibonacci(int n)
 		while(true)
         {
 			n3 = n1 + n2;
-			write(sep, " ", n3);
-			if (n3 >= n)
+			if (n3 > n)
             {
 				return;
 			}
+			write(sep, " ", n3);
 			n1 = n2;
 			n2 = n3;
 		}
