@@ -434,6 +434,10 @@ public class LexicalScanner {
         return this.column;
     }
 
+    public int getPosition(){
+        return this.position;
+    }
+
     public void restartPos(){
         this.position = 0;
     }
