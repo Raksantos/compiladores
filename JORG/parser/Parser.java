@@ -107,11 +107,11 @@ public class Parser {
 
     public void Dec(){
         if(typeCheck(currentTokenCategory) || constCheck(currentTokenCategory)){
-            printProduction("Decl", "DecVar");
+            printProduction("Dec", "DecVar");
             DecVar();
         }else if(currentTokenCategory == TokenCategory.PR_FUNCTION){
-            printProduction("Decl", "DeclFunc");
-            DeclFunc();
+            printProduction("Dec", "DecFunc");
+            DecFunc();
         }else{
             tokenExpected("'int', 'float', 'bool', 'char', 'string', 'const', 'function'");
         }
@@ -270,7 +270,7 @@ public class Parser {
         }
     } 
 
-    public void DeclArr(){
+    public void DecArr(){
         if(currentTokenCategory == TokenCategory.ABRE_COL) {
 
             getNextToken();
@@ -280,7 +280,7 @@ public class Parser {
                 getNextToken();
 
                 if(currentTokenCategory == TokenCategory.FECHA_COL){
-                    printProduction("DeclArr", " Tipo ArrOp [id] ';'");
+                    printProduction("DecArr", " Tipo ArrOp [id] ';'");
                     System.out.println(currentToken.toString());
                     getNextToken();
         
@@ -303,7 +303,141 @@ public class Parser {
             }
         }
 
-    public void DeclFunc(){
+    public void DecFunc(){
+        if(currentTokenCategory== TokenCategory.PR_FUNCTION) {
+            printProduction("DecFunc", "'function' TipoFunc NomeFunc '(' ParamsDec ')' Bloco");
+            System.out.println(currentToken.toString());
+            getNextToken();
+
+            TipoFunc();
+            NomeFunc();
+
+            if(currentTokenCategory == TokenCategory.ABRE_PAR) {
+                printProduction("ParamsDec", "'(' ParamOpOrNoParam ')'");
+                System.out.println(currentToken.toString());
+                getNextToken();
+    
+                ParamOpOrNoParam();
+    
+                if(currentTokenCategory == TokenCategory.FECHA_PAR) {
+                    System.out.println(currentToken.toString());
+                    getNextToken();
+                }
+                else {
+                    tokenExpected("')'");
+                }
+            }
+            else {
+                tokenExpected("'('");
+            }
+
+            Bloco();
+        }
+        else {
+            tokenExpected("'function'");
+        }
+    }
+
+    public void TipoFunc(){
+        if(typeCheck(currentTokenCategory)) {
+            printProduction("TipoFunc", "Tipo");
+            Tipo();
+        }
+        else if(currentTokenCategory == TokenCategory.TIPO_VOID) {
+            printProduction("TypeOrVoid", "'void'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else {
+            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'void'");
+        }
+    }
+
+    public void NomeFunc(){
+        if(currentTokenCategory == TokenCategory.PR_MAIN) {
+            printProduction("NomeFunc", "'main'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else if(currentTokenCategory == TokenCategory.ID) {
+            printProduction("NomeFunc", "'id'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else {
+            tokenExpected("'main', 'id'");
+        }
+    }
+
+    public void ParamOpOrNoParam() {
+        if(typeCheck(currentTokenCategory)) {
+            printProduction("ParamOpOrNoParam", "ParamOp");
+            ParamOp();
+        }
+        else {
+            printProduction("ParamOrNoParam", "'épsilon'");
+        }
+    }
+
+    public void ParamOp() {
+        if(typeCheck(currentTokenCategory)) {
+            printProduction("ParamOp", "DeclVarOp");
+            DeclVarOp();
+        }
+        else {
+            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'array'");
+        }
+    }
+
+    public void DeclVarOp() {
+        if(typeCheck(currentTokenCategory)) {
+            printProduction("DeclVarOp", "Type 'id' ParamCommaOp");
+            Tipo();
+
+            if(currentTokenCategory == TokenCategory.ID) {
+                System.out.println(currentToken.toString());
+                getNextToken();
+
+                if(currentTokenCategory == TokenCategory.SEP) {
+                    printProduction("ParamCommaOp", "',' ParamOp");
+                    System.out.println(currentToken.toString());
+                    getNextToken();
+                    ParamOp();
+                }
+                else {
+                    printProduction("ParamCommaOp", "'épsilon'");
+                }
+            }
+            else {
+                tokenExpected("'id'");
+            }
+        }
+        else {
+            tokenExpected("'int', 'float', 'bool', 'char', 'string'");
+        }
+    }
+
+    public void Bloco() {
+        if(currentTokenCategory == TokenCategory.ABRE_CHAVE) {
+            printProduction("Bloco", "'{' Sentences '}'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+            Sentences();
+
+            if(currentTokenCategory == TokenCategory.FECHA_CHAVE) {
+                System.out.println(currentToken.toString());
+                getNextToken();
+            }
+            else {
+                tokenExpected("'}'");
+            }
+        }
+        else {
+            tokenExpected("'{'");
+        }
+    }
+
+    public void Sentences(){
         
     }
 
