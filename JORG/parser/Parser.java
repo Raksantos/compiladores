@@ -106,7 +106,7 @@ public class Parser {
     }
 
     public void Dec(){
-        if(typeCheck(currentTokenCategory)){
+        if(typeCheck(currentTokenCategory) || constCheck(currentTokenCategory)){
             printProduction("Decl", "DecVar");
             DecVar();
         }else if(currentTokenCategory == TokenCategory.PR_FUNCTION){
@@ -190,10 +190,9 @@ public class Parser {
     }
 
     public boolean constCheck(TokenCategory currentTokenCategory) {
-        if (currentTokenCategory == TokenCategory.CONST_BOOL || currentTokenCategory == TokenCategory.CONST_INT 
-        || currentTokenCategory == TokenCategory.CONST_CHAR || currentTokenCategory == TokenCategory.CONST_FLOAT 
-        || currentTokenCategory == TokenCategory.CONST_STRING) {
-            return true;
+
+        if(currentTokenCategory == TokenCategory.PR_CONST){
+                return true;
         }
         return false;
     }
@@ -234,7 +233,8 @@ public class Parser {
         }else if(constCheck(currentTokenCategory)){
             printProduction("DecVar", "'const' Tipo ListId ';'");
 
-            ConstTipo();
+            getNextToken();
+            Tipo();
             ListId();
 
             if(currentTokenCategory == TokenCategory.TERMINAL) {
@@ -305,38 +305,6 @@ public class Parser {
 
     public void DeclFunc(){
         
-    }
-
-    //Rever essa analise de constantes
-    public void ConstTipo() {
-        if (currentTokenCategory == TokenCategory.CONST_BOOL) {
-            printProduction("const Tipo", "'const bool'");
-            System.out.println(currentToken.toString());
-            getNextToken();
-        }
-        else if (currentTokenCategory == TokenCategory.CONST_INT) {
-            printProduction("const Tipo", "'const int'");
-            System.out.println(currentToken.toString());
-            getNextToken();
-        }
-        else if (currentTokenCategory == TokenCategory.CONST_FLOAT) {
-            printProduction("const Tipo", "'const float'");
-            System.out.println(currentToken.toString());
-            getNextToken();
-        }
-        else if (currentTokenCategory == TokenCategory.CONST_CHAR) {
-            printProduction("const Tipo", "'const char'");
-            System.out.println(currentToken.toString());
-            getNextToken();
-        }
-        else if (currentTokenCategory == TokenCategory.CONST_STRING) {
-            printProduction("const Tipo", "'const string'");
-            System.out.println(currentToken.toString());
-            getNextToken();
-        }
-        else {
-            tokenExpected("'const int', 'const float', 'const bool', 'const char', 'const string'");
-        }
     }
 
     public void Tipo() {
