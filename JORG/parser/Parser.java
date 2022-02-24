@@ -84,11 +84,11 @@ public class Parser {
 
     //Inicializa leitura do código e verifica se é uma variável, array ou função
     private void S(){
-        if(typeCheck(currentTokenCategory) || currentTokenCategory == TokenCategory.ABRE_CHAVE ||
+        if(typeCheck(currentTokenCategory) || constCheck(currentTokenCategory) || currentTokenCategory == TokenCategory.ABRE_CHAVE ||
         currentTokenCategory == TokenCategory.PR_FUNCTION){
             //Declaração simples 
             printProduction("S", "Decl S");
-            Decl();
+            Dec();
             S();
         }else if(currentTokenCategory == TokenCategory.ID){
             //Declaração com atribuição
@@ -101,23 +101,19 @@ public class Parser {
             System.out.println(currentToken.toString());
         }else{
             //Tipagem ou declaração esperada
-            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'array', 'function', 'id', 'eof'");
+            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'const', 'id', 'eof'");
         }
     }
 
-    public void Decl(){
+    public void Dec(){
         if(typeCheck(currentTokenCategory)){
-            printProduction("Decl", "DeclVar");
-            DeclVar();
-
-        }else if(currentTokenCategory == TokenCategory.ABRE_COL){
-            printProduction("Decl", "DeclArr");
-            DeclArr();
+            printProduction("Decl", "DecVar");
+            DecVar();
         }else if(currentTokenCategory == TokenCategory.PR_FUNCTION){
             printProduction("Decl", "DeclFunc");
             DeclFunc();
         }else{
-            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'array', 'function'");
+            tokenExpected("'int', 'float', 'bool', 'char', 'string', 'const', 'function'");
         }
     }
 
@@ -171,13 +167,13 @@ public class Parser {
     public void Eb(){
         printProduction("Eb", "Tb Ebl");
         Tb();
-        Ebl();
+        //Ebl();
     }
 
     public void Tb(){
         printProduction("Tb", "Fb Tbl");
-        Fb();
-        Tbl();
+        //Fb();
+        //Tbl();
     }
 
     public void Exprl(){
@@ -222,11 +218,11 @@ public class Parser {
         }
     }
 
-    public void DeclVar(){
+    public void DecVar(){
         if(typeCheck(currentTokenCategory)) {
-            printProduction("DeclVar", "Type VarOp ';'");
-            Type();
-            VarOp();
+            printProduction("DecVar", "Tipo ListId ';'");
+            Tipo();
+            ListId();
 
             if(currentTokenCategory == TokenCategory.TERMINAL) {
                 System.out.println(currentToken.toString());
@@ -235,15 +231,44 @@ public class Parser {
             else {
                 tokenExpected("';'");
             }
-        }
-        else {
+        }else if(constCheck(currentTokenCategory)){
+            printProduction("DecVar", "'const' Tipo ListId ';'");
+
+            ConstTipo();
+            ListId();
+
+            if(currentTokenCategory == TokenCategory.TERMINAL) {
+                System.out.println(currentToken.toString());
+                getNextToken();
+            }
+            else {
+                tokenExpected("';'");
+            }
+        }else {
             tokenExpected("'int', 'float', 'bool', 'char', 'string'");
         }
     }
 
-    public void VarOp(){
+    public void ListId(){
+        if(currentTokenCategory == TokenCategory.ID){
+            printProduction("ListId", "'id' CommaOp");
+            System.out.println(currentToken.toString());
 
-    }
+            getNextToken();
+            
+            if(currentTokenCategory == TokenCategory.SEP) {
+                printProduction("CommaOp", "',' VarOp");
+                System.out.println(currentToken.toString());
+                getNextToken();
+                ListId();
+            }
+            else {
+                printProduction("CommaOp", "'épsilon'");
+            }
+        }else {
+            tokenExpected("'id'");
+        }
+    } 
 
     public void DeclArr(){
         if(currentTokenCategory == TokenCategory.ABRE_COL) {
@@ -255,11 +280,11 @@ public class Parser {
                 getNextToken();
 
                 if(currentTokenCategory == TokenCategory.FECHA_COL){
-                    printProduction("DeclArr", " Type ArrOp [id] ';'");
+                    printProduction("DeclArr", " Tipo ArrOp [id] ';'");
                     System.out.println(currentToken.toString());
                     getNextToken();
         
-                    Type();
+                    Tipo();
 
                     if(currentTokenCategory == TokenCategory.TERMINAL) {
                         System.out.println(currentToken.toString());
@@ -282,29 +307,61 @@ public class Parser {
         
     }
 
-    public void Type() {
+    //Rever essa analise de constantes
+    public void ConstTipo() {
+        if (currentTokenCategory == TokenCategory.CONST_BOOL) {
+            printProduction("const Tipo", "'const bool'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else if (currentTokenCategory == TokenCategory.CONST_INT) {
+            printProduction("const Tipo", "'const int'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else if (currentTokenCategory == TokenCategory.CONST_FLOAT) {
+            printProduction("const Tipo", "'const float'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else if (currentTokenCategory == TokenCategory.CONST_CHAR) {
+            printProduction("const Tipo", "'const char'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else if (currentTokenCategory == TokenCategory.CONST_STRING) {
+            printProduction("const Tipo", "'const string'");
+            System.out.println(currentToken.toString());
+            getNextToken();
+        }
+        else {
+            tokenExpected("'const int', 'const float', 'const bool', 'const char', 'const string'");
+        }
+    }
+
+    public void Tipo() {
         if (currentTokenCategory == TokenCategory.TIPO_BOOL) {
-            printProduction("Type", "'bool'");
+            printProduction("Tipo", "'bool'");
             System.out.println(currentToken.toString());
             getNextToken();
         }
         else if (currentTokenCategory == TokenCategory.TIPO_INT) {
-            printProduction("Type", "'int'");
+            printProduction("Tipo", "'int'");
             System.out.println(currentToken.toString());
             getNextToken();
         }
         else if (currentTokenCategory == TokenCategory.TIPO_FLOAT) {
-            printProduction("Type", "'float'");
+            printProduction("Tipo", "'float'");
             System.out.println(currentToken.toString());
             getNextToken();
         }
         else if (currentTokenCategory == TokenCategory.TIPO_CHAR) {
-            printProduction("Type", "'char'");
+            printProduction("Tipo", "'char'");
             System.out.println(currentToken.toString());
             getNextToken();
         }
         else if (currentTokenCategory == TokenCategory.TIPO_STRING) {
-            printProduction("Type", "'string'");
+            printProduction("Tipo", "'string'");
             System.out.println(currentToken.toString());
             getNextToken();
         }
@@ -318,10 +375,10 @@ public class Parser {
         System.out.println(String.format(format, "", leftProduction, rightProduction));
     }
 
-    public boolean typeCheck(TokenCategory currentTokenClass) {
-        if (currentTokenClass == TokenCategory.TIPO_BOOL || currentTokenClass == TokenCategory.TIPO_INT 
-        || currentTokenClass == TokenCategory.TIPO_CHAR || currentTokenClass == TokenCategory.TIPO_FLOAT 
-        || currentTokenClass == TokenCategory.TIPO_STRING) {
+    public boolean typeCheck(TokenCategory currentTokenCategory) {
+        if (currentTokenCategory == TokenCategory.TIPO_BOOL || currentTokenCategory == TokenCategory.TIPO_INT 
+        || currentTokenCategory == TokenCategory.TIPO_CHAR || currentTokenCategory == TokenCategory.TIPO_FLOAT 
+        || currentTokenCategory == TokenCategory.TIPO_STRING) {
             return true;
         }
         return false;

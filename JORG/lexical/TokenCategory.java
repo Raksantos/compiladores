@@ -1,6 +1,7 @@
 package JORG.lexical;
 
 public enum TokenCategory {
+    // Identificador
     ID(1),
 
     // Operadores
@@ -21,46 +22,49 @@ public enum TokenCategory {
     OP_N_IGUAL(16),
     OP_ATR(17),
     OP_CONCAT(18),
+    OP_SIZE(19),
 
     // Delimitadores
-    ABRE_PAR(19),
-    FECHA_PAR(20),
-    ABRE_COL(21),
-    FECHA_COL(22),
-    ABRE_CHAVE(23),
-    FECHA_CHAVE(24),
-    TERMINAL(25),
-    SEP(26),
-    ASPAS(27),
-    EOF_TOKEN(28),
+    ABRE_PAR(20),
+    FECHA_PAR(21),
+    ABRE_COL(22),
+    FECHA_COL(23),
+    ABRE_CHAVE(24),
+    FECHA_CHAVE(25),
+    TERMINAL(26),
+    SEP(27),
+    ASPAS(28),
+    EOF_TOKEN(29),
 
     // Constantes Literais
-    CONST_INT(29),
-    CONST_FLOAT(30),
-    CONST_CHAR(31),
-    CONST_STRING(32),
-    CONST_BOOL(33),
+    CONST_INT(30),
+    CONST_FLOAT(31),
+    CONST_CHAR(32),
+    CONST_STRING(33),
+    CONST_BOOL(34),
 
     // Palavras Reservadas
-    PR_FUNCTION(34),
-    PR_PROCEDURE(35),
+    PR_FUNCTION(35),
     PR_MAIN(36),
     PR_RETURN(37),
     PR_INPUT(38),
     PR_WRITE(39),
-    PR_IF(40),
-    PR_ELSE(41),
-    PR_FOR(42),
-    PR_WHILE(43),
-    TIPO_INT(44),
-    TIPO_FLOAT(45),
-    TIPO_CHAR(46),
-    TIPO_STRING(47),
-    TIPO_BOOL(48),
-    TIPO_VOID(49),
+    PR_WRITELN(40),
+    PR_IF(41),
+    PR_ELSE(42),
+    PR_FOR(43),
+    PR_WHILE(44),
+    PR_BREAK(45),
+    PR_CONST(46),
+    TIPO_INT(47),
+    TIPO_FLOAT(48),
+    TIPO_CHAR(49),
+    TIPO_STRING(50),
+    TIPO_BOOL(51),
+    TIPO_VOID(52),
 
     // Erros Léxicos
-    BAD_TOKEN(50);
+    BAD_TOKEN(53);
 
     private final int numericCode;
 
