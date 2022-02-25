@@ -1,5 +1,4 @@
-0001   
-function void shellSort(int array[], int n)
+   1  function void shellSort(int array[], int n)
               [0001, 0000] (0035,          PR_FUNCTION) {function}
               [0001, 0009] (0052,            TIPO_VOID) {void}
               [0001, 0014] (0001,                   ID) {shellSort}
@@ -12,11 +11,9 @@ function void shellSort(int array[], int n)
               [0001, 0037] (0047,             TIPO_INT) {int}
               [0001, 0041] (0001,                   ID) {n}
               [0001, 0042] (0021,            FECHA_PAR) {)}
-0002   
-{
+   2  {
               [0002, 0000] (0024,           ABRE_CHAVE) {{}
-0003   
-	int h = 1, c, j;
+   3  	int h = 1, c, j;
               [0003, 0001] (0047,             TIPO_INT) {int}
               [0003, 0005] (0001,                   ID) {h}
               [0003, 0007] (0017,               OP_ATR) {=}
@@ -26,21 +23,17 @@ function void shellSort(int array[], int n)
               [0003, 0013] (0027,                  SEP) {,}
               [0003, 0015] (0001,                   ID) {j}
               [0003, 0016] (0026,             TERMINAL) {;}
-0004   
-
-0005   
-	while(h < n) 
+   4  
+   5  	while(h < n) 
               [0005, 0001] (0044,             PR_WHILE) {while}
               [0005, 0006] (0020,             ABRE_PAR) {(}
               [0005, 0007] (0001,                   ID) {h}
               [0005, 0009] (0012,             OP_MENOR) {<}
               [0005, 0011] (0001,                   ID) {n}
               [0005, 0012] (0021,            FECHA_PAR) {)}
-0006   
-    {
+   6      {
               [0006, 0004] (0024,           ABRE_CHAVE) {{}
-0007   
-		h = h * 3 + 1;
+   7  		h = h * 3 + 1;
               [0007, 0002] (0001,                   ID) {h}
               [0007, 0004] (0017,               OP_ATR) {=}
               [0007, 0006] (0001,                   ID) {h}
@@ -49,34 +42,27 @@ function void shellSort(int array[], int n)
               [0007, 0012] (0002,               OP_ADD) {+}
               [0007, 0014] (0030,            CONST_INT) {1}
               [0007, 0015] (0026,             TERMINAL) {;}
-0008   
-	}
+   8  	}
               [0008, 0001] (0025,          FECHA_CHAVE) {}}
-0009   
-
-0010   
-	h = h/3;
+   9  
+  10  	h = h/3;
               [0010, 0001] (0001,                   ID) {h}
               [0010, 0003] (0017,               OP_ATR) {=}
               [0010, 0005] (0001,                   ID) {h}
               [0010, 0006] (0005,               OP_DIV) {/}
               [0010, 0007] (0030,            CONST_INT) {3}
               [0010, 0008] (0026,             TERMINAL) {;}
-0011   
-
-0012   
-	while(h > 0)
+  11  
+  12  	while(h > 0)
               [0012, 0001] (0044,             PR_WHILE) {while}
               [0012, 0006] (0020,             ABRE_PAR) {(}
               [0012, 0007] (0001,                   ID) {h}
               [0012, 0009] (0011,             OP_MAIOR) {>}
               [0012, 0011] (0030,            CONST_INT) {0}
               [0012, 0012] (0021,            FECHA_PAR) {)}
-0013   
-    {
+  13      {
               [0013, 0004] (0024,           ABRE_CHAVE) {{}
-0014   
-	    for(int i, h, n, 1)
+  14  	    for(int i, h, n, 1)
               [0014, 0005] (0043,               PR_FOR) {for}
               [0014, 0008] (0020,             ABRE_PAR) {(}
               [0014, 0009] (0047,             TIPO_INT) {int}
@@ -88,11 +74,9 @@ function void shellSort(int array[], int n)
               [0014, 0020] (0027,                  SEP) {,}
               [0014, 0022] (0030,            CONST_INT) {1}
               [0014, 0023] (0021,            FECHA_PAR) {)}
-0015   
-        {
+  15          {
               [0015, 0008] (0024,           ABRE_CHAVE) {{}
-0016   
-			c = array[i];
+  16  			c = array[i];
               [0016, 0003] (0001,                   ID) {c}
               [0016, 0005] (0017,               OP_ATR) {=}
               [0016, 0007] (0001,                   ID) {array}
@@ -100,22 +84,19 @@ function void shellSort(int array[], int n)
               [0016, 0013] (0001,                   ID) {i}
               [0016, 0014] (0023,            FECHA_COL) {]}
               [0016, 0015] (0026,             TERMINAL) {;}
-0017   
-			j = i;
+  17  			j = i;
               [0017, 0003] (0001,                   ID) {j}
               [0017, 0005] (0017,               OP_ATR) {=}
               [0017, 0007] (0001,                   ID) {i}
               [0017, 0008] (0026,             TERMINAL) {;}
-0018   
-
-0019   
-			while(j >= h & array[j - h] > c)
+  18  
+  19  			while(j >= h & array[j - h] > c)
               [0019, 0003] (0044,             PR_WHILE) {while}
               [0019, 0008] (0020,             ABRE_PAR) {(}
               [0019, 0009] (0001,                   ID) {j}
               [0019, 0011] (0014,          OP_MAIOR_IG) {>=}
               [0019, 0014] (0001,                   ID) {h}
-              [0019, 0016] (0053,            BAD_TOKEN) {&}
+              [0019, 0016] (0010,               OP_AND) {&}
               [0019, 0018] (0001,                   ID) {array}
               [0019, 0023] (0022,             ABRE_COL) {[}
               [0019, 0024] (0001,                   ID) {j}
@@ -125,11 +106,9 @@ function void shellSort(int array[], int n)
               [0019, 0031] (0011,             OP_MAIOR) {>}
               [0019, 0033] (0001,                   ID) {c}
               [0019, 0034] (0021,            FECHA_PAR) {)}
-0020   
-            {
+  20              {
               [0020, 0012] (0024,           ABRE_CHAVE) {{}
-0021   
-				array [j] = array[j - h]; 
+  21  				array [j] = array[j - h]; 
               [0021, 0004] (0001,                   ID) {array}
               [0021, 0010] (0022,             ABRE_COL) {[}
               [0021, 0011] (0001,                   ID) {j}
@@ -142,21 +121,17 @@ function void shellSort(int array[], int n)
               [0021, 0026] (0001,                   ID) {h}
               [0021, 0027] (0023,            FECHA_COL) {]}
               [0021, 0028] (0026,             TERMINAL) {;}
-0022   
-				j = j - h;
+  22  				j = j - h;
               [0022, 0004] (0001,                   ID) {j}
               [0022, 0006] (0017,               OP_ATR) {=}
               [0022, 0008] (0001,                   ID) {j}
               [0022, 0010] (0003,               OP_SUB) {-}
               [0022, 0012] (0001,                   ID) {h}
               [0022, 0013] (0026,             TERMINAL) {;}
-0023   
-			}
+  23  			}
               [0023, 0003] (0025,          FECHA_CHAVE) {}}
-0024   
-
-0025   
-			array [j]  = c;
+  24  
+  25  			array [j]  = c;
               [0025, 0003] (0001,                   ID) {array}
               [0025, 0009] (0022,             ABRE_COL) {[}
               [0025, 0010] (0001,                   ID) {j}
@@ -164,77 +139,61 @@ function void shellSort(int array[], int n)
               [0025, 0014] (0017,               OP_ATR) {=}
               [0025, 0016] (0001,                   ID) {c}
               [0025, 0017] (0026,             TERMINAL) {;}
-0026   
-		}
+  26  		}
               [0026, 0002] (0025,          FECHA_CHAVE) {}}
-0027   
-
-0028   
-		h = h/2;
+  27  
+  28  		h = h/2;
               [0028, 0002] (0001,                   ID) {h}
               [0028, 0004] (0017,               OP_ATR) {=}
               [0028, 0006] (0001,                   ID) {h}
               [0028, 0007] (0005,               OP_DIV) {/}
               [0028, 0008] (0030,            CONST_INT) {2}
               [0028, 0009] (0026,             TERMINAL) {;}
-0029   
-	}
+  29  	}
               [0029, 0001] (0025,          FECHA_CHAVE) {}}
-0030   
-}
+  30  }
               [0030, 0000] (0025,          FECHA_CHAVE) {}}
-0031   
-	
-0032   
-function void main() 
+  31  	
+  32  function void main() 
               [0032, 0000] (0035,          PR_FUNCTION) {function}
               [0032, 0009] (0052,            TIPO_VOID) {void}
               [0032, 0014] (0036,              PR_MAIN) {main}
               [0032, 0018] (0020,             ABRE_PAR) {(}
               [0032, 0019] (0021,            FECHA_PAR) {)}
-0033   
-{
+  33  {
               [0033, 0000] (0024,           ABRE_CHAVE) {{}
-0034   
-	int n;
+  34  	int n;
               [0034, 0001] (0047,             TIPO_INT) {int}
               [0034, 0005] (0001,                   ID) {n}
               [0034, 0006] (0026,             TERMINAL) {;}
-0035   
-	write("Digite o tamanho do Array: ");
+  35  	write("Digite o tamanho do Array: ");
               [0035, 0001] (0039,             PR_WRITE) {write}
               [0035, 0006] (0020,             ABRE_PAR) {(}
               [0035, 0007] (0033,         CONST_STRING) {"Digite o tamanho do Array: "}
               [0035, 0036] (0021,            FECHA_PAR) {)}
               [0035, 0037] (0026,             TERMINAL) {;}
-0036   
-	input(n);
+  36  	input(n);
               [0036, 0001] (0038,             PR_INPUT) {input}
               [0036, 0006] (0020,             ABRE_PAR) {(}
               [0036, 0007] (0001,                   ID) {n}
               [0036, 0008] (0021,            FECHA_PAR) {)}
               [0036, 0009] (0026,             TERMINAL) {;}
-0037   
-
-0038   
-	int array[n];
+  37  
+  38  	int array[n];
               [0038, 0001] (0047,             TIPO_INT) {int}
               [0038, 0005] (0001,                   ID) {array}
               [0038, 0010] (0022,             ABRE_COL) {[}
               [0038, 0011] (0001,                   ID) {n}
               [0038, 0012] (0023,            FECHA_COL) {]}
               [0038, 0013] (0026,             TERMINAL) {;}
-0039   
-
-0040   
-	write("Digite os numeros que serao ordenados: ");
+  39  
+  40  	write("Digite os numeros que serao ordenados: ");
               [0040, 0001] (0039,             PR_WRITE) {write}
               [0040, 0006] (0020,             ABRE_PAR) {(}
               [0040, 0007] (0033,         CONST_STRING) {"Digite os numeros que serao ordenados: "}
               [0040, 0048] (0021,            FECHA_PAR) {)}
               [0040, 0049] (0026,             TERMINAL) {;}
-0041   
-	for(int i, 0, n, 1)
+  41  	for(int i, 0, n, 1)
               [0041, 0001] (0043,               PR_FOR) {for}
               [0041, 0004] (0020,             ABRE_PAR) {(}
               [0041, 0005] (0047,             TIPO_INT) {int}
@@ -246,11 +205,9 @@ function void main()
               [0041, 0016] (0027,                  SEP) {,}
               [0041, 0018] (0030,            CONST_INT) {1}
               [0041, 0019] (0021,            FECHA_PAR) {)}
-0042   
-    {
+  42      {
               [0042, 0004] (0024,           ABRE_CHAVE) {{}
-0043   
-		write(array[i]);
+  43  		write(array[i]);
               [0043, 0002] (0039,             PR_WRITE) {write}
               [0043, 0007] (0020,             ABRE_PAR) {(}
               [0043, 0008] (0001,                   ID) {array}
@@ -259,20 +216,16 @@ function void main()
               [0043, 0015] (0023,            FECHA_COL) {]}
               [0043, 0016] (0021,            FECHA_PAR) {)}
               [0043, 0017] (0026,             TERMINAL) {;}
-0044   
-	}
+  44  	}
               [0044, 0001] (0025,          FECHA_CHAVE) {}}
-0045   
-		
-0046   
-	write("Os valores digitados foram: ");
+  45  		
+  46  	write("Os valores digitados foram: ");
               [0046, 0001] (0039,             PR_WRITE) {write}
               [0046, 0006] (0020,             ABRE_PAR) {(}
               [0046, 0007] (0033,         CONST_STRING) {"Os valores digitados foram: "}
               [0046, 0037] (0021,            FECHA_PAR) {)}
               [0046, 0038] (0026,             TERMINAL) {;}
-0047   
-	for(int j, 0, n, 1)
+  47  	for(int j, 0, n, 1)
               [0047, 0001] (0043,               PR_FOR) {for}
               [0047, 0004] (0020,             ABRE_PAR) {(}
               [0047, 0005] (0047,             TIPO_INT) {int}
@@ -284,11 +237,9 @@ function void main()
               [0047, 0016] (0027,                  SEP) {,}
               [0047, 0018] (0030,            CONST_INT) {1}
               [0047, 0019] (0021,            FECHA_PAR) {)}
-0048   
-    {
+  48      {
               [0048, 0004] (0024,           ABRE_CHAVE) {{}
-0049   
-		int a = array[j];
+  49  		int a = array[j];
               [0049, 0002] (0047,             TIPO_INT) {int}
               [0049, 0006] (0001,                   ID) {a}
               [0049, 0008] (0017,               OP_ATR) {=}
@@ -297,20 +248,16 @@ function void main()
               [0049, 0016] (0001,                   ID) {j}
               [0049, 0017] (0023,            FECHA_COL) {]}
               [0049, 0018] (0026,             TERMINAL) {;}
-0050   
-		write(a);
+  50  		write(a);
               [0050, 0002] (0039,             PR_WRITE) {write}
               [0050, 0007] (0020,             ABRE_PAR) {(}
               [0050, 0008] (0001,                   ID) {a}
               [0050, 0009] (0021,            FECHA_PAR) {)}
               [0050, 0010] (0026,             TERMINAL) {;}
-0051   
-	}
+  51  	}
               [0051, 0001] (0025,          FECHA_CHAVE) {}}
-0052   
-	
-0053   
-	shellSort(array, n);
+  52  	
+  53  	shellSort(array, n);
               [0053, 0001] (0001,                   ID) {shellSort}
               [0053, 0010] (0020,             ABRE_PAR) {(}
               [0053, 0011] (0001,                   ID) {array}
@@ -318,17 +265,14 @@ function void main()
               [0053, 0018] (0001,                   ID) {n}
               [0053, 0019] (0021,            FECHA_PAR) {)}
               [0053, 0020] (0026,             TERMINAL) {;}
-0054   
-	
-0055   
-	write("Valores ordenados: ");
+  54  	
+  55  	write("Valores ordenados: ");
               [0055, 0001] (0039,             PR_WRITE) {write}
               [0055, 0006] (0020,             ABRE_PAR) {(}
               [0055, 0007] (0033,         CONST_STRING) {"Valores ordenados: "}
               [0055, 0028] (0021,            FECHA_PAR) {)}
               [0055, 0029] (0026,             TERMINAL) {;}
-0056   
-	for(int k, 0 , n, 1)
+  56  	for(int k, 0 , n, 1)
               [0056, 0001] (0043,               PR_FOR) {for}
               [0056, 0004] (0020,             ABRE_PAR) {(}
               [0056, 0005] (0047,             TIPO_INT) {int}
@@ -340,11 +284,9 @@ function void main()
               [0056, 0017] (0027,                  SEP) {,}
               [0056, 0019] (0030,            CONST_INT) {1}
               [0056, 0020] (0021,            FECHA_PAR) {)}
-0057   
-    {
+  57      {
               [0057, 0004] (0024,           ABRE_CHAVE) {{}
-0058   
-		int b = array[k];
+  58  		int b = array[k];
               [0058, 0002] (0047,             TIPO_INT) {int}
               [0058, 0006] (0001,                   ID) {b}
               [0058, 0008] (0017,               OP_ATR) {=}
@@ -353,18 +295,15 @@ function void main()
               [0058, 0016] (0001,                   ID) {k}
               [0058, 0017] (0023,            FECHA_COL) {]}
               [0058, 0018] (0026,             TERMINAL) {;}
-0059   
-		write(b);
+  59  		write(b);
               [0059, 0002] (0039,             PR_WRITE) {write}
               [0059, 0007] (0020,             ABRE_PAR) {(}
               [0059, 0008] (0001,                   ID) {b}
               [0059, 0009] (0021,            FECHA_PAR) {)}
               [0059, 0010] (0026,             TERMINAL) {;}
-0060   
-	}
+  60  	}
               [0060, 0001] (0025,          FECHA_CHAVE) {}}
-0061   
-}
+  61  }
               [0061, 0000] (0025,          FECHA_CHAVE) {}}
-0062   
+  62  
               [0062, 0002] (0029,            EOF_TOKEN) {EOF}

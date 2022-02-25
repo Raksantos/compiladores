@@ -23,9 +23,8 @@ public class Compiler {
 
             while(scanner.hasNextLine()){
                 line = scanner.nextLine();
-                lineRow = "%04d   ";
-                System.out.println(String.format(lineRow, lexicalScanner.getRow()));
-                System.out.println(line);
+                lineRow = "%4d  ";
+                System.out.println(String.format(lineRow, lexicalScanner.getRow()) + line);
 
                 line += '\n';
 
@@ -42,11 +41,11 @@ public class Compiler {
                 lexicalScanner.nextRow();
             }
 
-            lineRow = "%04d   ";
+            lineRow = "%4d  ";
             System.out.println(String.format(lineRow, lexicalScanner.getRow()));
             Token EOFToken = new Token("EOF", TokenCategory.EOF_TOKEN, lexicalScanner.getRow(), lexicalScanner.getColumn());
             System.out.println(EOFToken.toString());
-
+            
             scanner.close();
         }catch(Exception e){
             e.printStackTrace();

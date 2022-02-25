@@ -57,12 +57,12 @@ public class LexicalScanner {
                         else if(isANDOperator(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
-                            state = 10;
+                            state = 12;
                         }
                         else if(isOROperator(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
-                            state = 11;
+                            state = 12;
                         }
                         else if(isDelimiter(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
@@ -306,6 +306,7 @@ public class LexicalScanner {
         tokenTable.put("string", TokenCategory.TIPO_STRING);
         tokenTable.put("bool", TokenCategory.TIPO_BOOL);
         tokenTable.put("void", TokenCategory.TIPO_VOID);
+        tokenTable.put("const", TokenCategory.PR_CONST);
 
         // Delimiters
         tokenTable.put("(", TokenCategory.ABRE_PAR);

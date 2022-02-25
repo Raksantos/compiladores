@@ -1,20 +1,17 @@
-0001   
-function void main() {
+   1  function void main() {
               [0001, 0000] (0035,          PR_FUNCTION) {function}
               [0001, 0009] (0052,            TIPO_VOID) {void}
               [0001, 0014] (0036,              PR_MAIN) {main}
               [0001, 0018] (0020,             ABRE_PAR) {(}
               [0001, 0019] (0021,            FECHA_PAR) {)}
               [0001, 0021] (0024,           ABRE_CHAVE) {{}
-0002   
-    writeln("Alo Mundo!");
+   2      writeln("Alo Mundo!");
               [0002, 0004] (0040,           PR_WRITELN) {writeln}
               [0002, 0011] (0020,             ABRE_PAR) {(}
               [0002, 0012] (0033,         CONST_STRING) {"Alo Mundo!"}
               [0002, 0024] (0021,            FECHA_PAR) {)}
               [0002, 0025] (0026,             TERMINAL) {;}
-0003   
-}
+   3  }
               [0003, 0000] (0025,          FECHA_CHAVE) {}}
-0004   
+   4  
               [0004, 0002] (0029,            EOF_TOKEN) {EOF}
