@@ -57,12 +57,12 @@ public class LexicalScanner {
                         else if(isANDOperator(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
-                            state = 10;
+                            state = 12;
                         }
                         else if(isOROperator(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
                             nextChar();
-                            state = 11;
+                            state = 12;
                         }
                         else if(isDelimiter(current)){
                             currentTokenValue = getNextTokenValue(currentTokenValue, current);
