@@ -300,6 +300,7 @@ public class LexicalScanner {
         tokenTable.put("for", TokenCategory.PR_FOR);
         tokenTable.put("while", TokenCategory.PR_WHILE);
         tokenTable.put("break", TokenCategory.PR_BREAK);
+        tokenTable.put("const", TokenCategory.PR_CONST);
         tokenTable.put("int", TokenCategory.TIPO_INT);
         tokenTable.put("float", TokenCategory.TIPO_FLOAT);
         tokenTable.put("char", TokenCategory.TIPO_CHAR);
@@ -438,6 +439,10 @@ public class LexicalScanner {
 
     public int getColumn(){
         return this.column;
+    }
+
+    public int getPosition(){
+        return this.position;
     }
 
     public void restartPos(){
