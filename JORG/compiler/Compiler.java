@@ -1,12 +1,8 @@
 package JORG.compiler;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 import JORG.lexical.LexicalScanner;
-import JORG.lexical.Token;
-import JORG.lexical.TokenCategory;
 
 import JORG.parser.Parser;
 public class Compiler {

@@ -1,0 +1,47 @@
+   1  function void main() {
+          S = DecFunc
+          DecFunc = 'function' TipoFunc NomeFunc '(' ParamsDec ')' Bloco
+              [0001, 0000] (0035,          PR_FUNCTION) {function}
+          TypeOrVoid = 'void'
+              [0001, 0009] (0052,            TIPO_VOID) {void}
+          NomeFunc = 'main'
+              [0001, 0014] (0036,              PR_MAIN) {main}
+              [0001, 0018] (0020,             ABRE_PAR) {(}
+          ParamsDec = ε
+              [0001, 0019] (0021,            FECHA_PAR) {)}
+          Bloco = '{' Sentencas '}'
+              [0001, 0021] (0024,           ABRE_CHAVE) {{}
+   2      writeln("Alo Mundo!");
+          Sentencas = Cmd Sentencas
+          Cmd = 'writeln' '(' ParamsChamada ')' ';'
+              [0002, 0004] (0040,           PR_WRITELN) {writeln}
+              [0002, 0011] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_STRING'
+              [0002, 0012] (0033,         CONST_STRING) {"Alo Mundo!"}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0002, 0024] (0021,            FECHA_PAR) {)}
+              [0002, 0025] (0026,             TERMINAL) {;}
+   3  }
+          Sentencas = ε
+              [0003, 0000] (0025,          FECHA_CHAVE) {}}
+   4  
+          S = ε
+              [0004, 0001] (0029,            EOF_TOKEN) {EOF}

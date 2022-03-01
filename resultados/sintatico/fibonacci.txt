@@ -1,0 +1,656 @@
+   1  function void fibonacci(int n) 
+          S = DecFunc
+          DecFunc = 'function' TipoFunc NomeFunc '(' ParamsDec ')' Bloco
+              [0001, 0000] (0035,          PR_FUNCTION) {function}
+          TypeOrVoid = 'void'
+              [0001, 0009] (0052,            TIPO_VOID) {void}
+          NomeFunc = 'id'
+              [0001, 0014] (0001,                   ID) {fibonacci}
+              [0001, 0023] (0020,             ABRE_PAR) {(}
+          ParamsDec = Tipo 'id' Arr ParamsDecX
+              [0001, 0024] (0047,             TIPO_INT) {int}
+              [0001, 0028] (0001,                   ID) {n}
+          Arr = ε
+          ParamsDecX = ε
+              [0001, 0029] (0021,            FECHA_PAR) {)}
+   2  {
+          Bloco = '{' Sentencas '}'
+              [0002, 0000] (0024,           ABRE_CHAVE) {{}
+   3  	int n1 = 0, n2 = 1, n3;
+          Sentencas = DecVar Sentencas
+          DecVar = Tipo ListId ';'
+          Tipo = 'int'
+              [0003, 0001] (0047,             TIPO_INT) {int}
+          ListId = AtribOuId ListIdX
+          AribOuId = 'id' ArrId Atrib
+              [0003, 0005] (0001,                   ID) {n1}
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0003, 0008] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_INT'
+              [0003, 0010] (0030,            CONST_INT) {0}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ListIdX = ',' ListId
+              [0003, 0011] (0027,                  SEP) {,}
+          ListId = AtribOuId ListIdX
+          AribOuId = 'id' ArrId Atrib
+              [0003, 0013] (0001,                   ID) {n2}
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0003, 0016] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_INT'
+              [0003, 0018] (0030,            CONST_INT) {1}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ListIdX = ',' ListId
+              [0003, 0019] (0027,                  SEP) {,}
+          ListId = AtribOuId ListIdX
+          AribOuId = 'id' ArrId Atrib
+              [0003, 0021] (0001,                   ID) {n3}
+          ArrId = ε
+          Atrib = ε
+          ListIdX = ε
+              [0003, 0023] (0026,             TERMINAL) {;}
+   4  	if(n == 0)
+          Sentencas = Cmd Sentencas
+          Cmd = 'if' '(' Ebool ')' Bloco Else
+              [0004, 0001] (0041,                PR_IF) {if}
+              [0004, 0003] (0020,             ABRE_PAR) {(}
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0004, 0004] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = OpRelac Earit TrelacX
+          OpRelac = 'OP_IGUAL'
+              [0004, 0006] (0013,             OP_IGUAL) {==}
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_INT'
+              [0004, 0009] (0030,            CONST_INT) {0}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+              [0004, 0010] (0021,            FECHA_PAR) {)}
+   5      {
+          Bloco = '{' Sentencas '}'
+              [0005, 0004] (0024,           ABRE_CHAVE) {{}
+   6          write(n);
+          Sentencas = Cmd Sentencas
+          Cmd = 'write' '(' ParamsChamada ')' ';'
+              [0006, 0008] (0039,             PR_WRITE) {write}
+              [0006, 0013] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0006, 0014] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0006, 0015] (0021,            FECHA_PAR) {)}
+              [0006, 0016] (0026,             TERMINAL) {;}
+   7  	}
+          Sentencas = ε
+              [0007, 0001] (0025,          FECHA_CHAVE) {}}
+   8      if(n == 1)
+          Else = ε
+          Sentencas = Cmd Sentencas
+          Cmd = 'if' '(' Ebool ')' Bloco Else
+              [0008, 0004] (0041,                PR_IF) {if}
+              [0008, 0006] (0020,             ABRE_PAR) {(}
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0008, 0007] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = OpRelac Earit TrelacX
+          OpRelac = 'OP_IGUAL'
+              [0008, 0009] (0013,             OP_IGUAL) {==}
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_INT'
+              [0008, 0012] (0030,            CONST_INT) {1}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+              [0008, 0013] (0021,            FECHA_PAR) {)}
+   9      {
+          Bloco = '{' Sentencas '}'
+              [0009, 0004] (0024,           ABRE_CHAVE) {{}
+  10          write("0, ", n);
+          Sentencas = Cmd Sentencas
+          Cmd = 'write' '(' ParamsChamada ')' ';'
+              [0010, 0008] (0039,             PR_WRITE) {write}
+              [0010, 0013] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_STRING'
+              [0010, 0014] (0033,         CONST_STRING) {"0, "}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ',' ParamsChamada
+              [0010, 0019] (0027,                  SEP) {,}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0010, 0021] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0010, 0022] (0021,            FECHA_PAR) {)}
+              [0010, 0023] (0026,             TERMINAL) {;}
+  11  	}
+          Sentencas = ε
+              [0011, 0001] (0025,          FECHA_CHAVE) {}}
+  12      else
+              [0012, 0004] (0042,              PR_ELSE) {else}
+  13      {
+          Bloco = '{' Sentencas '}'
+              [0013, 0004] (0024,           ABRE_CHAVE) {{}
+  14  		char sep = ',';
+          Sentencas = DecVar Sentencas
+          DecVar = Tipo ListId ';'
+          Tipo = 'char'
+              [0014, 0002] (0049,            TIPO_CHAR) {char}
+          ListId = AtribOuId ListIdX
+          AribOuId = 'id' ArrId Atrib
+              [0014, 0007] (0001,                   ID) {sep}
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0014, 0011] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_CHAR'
+              [0014, 0013] (0032,           CONST_CHAR) {','}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ListIdX = ε
+              [0014, 0016] (0026,             TERMINAL) {;}
+  15  		write("0, 1, ");
+          Sentencas = Cmd Sentencas
+          Cmd = 'write' '(' ParamsChamada ')' ';'
+              [0015, 0002] (0039,             PR_WRITE) {write}
+              [0015, 0007] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_STRING'
+              [0015, 0008] (0033,         CONST_STRING) {"0, 1, "}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0015, 0016] (0021,            FECHA_PAR) {)}
+              [0015, 0017] (0026,             TERMINAL) {;}
+  16  		while(true)
+          Sentencas = Cmd Sentencas
+          Cmd = 'while' '(' Ebool ')' Bloco
+              [0016, 0002] (0044,             PR_WHILE) {while}
+              [0016, 0007] (0020,             ABRE_PAR) {(}
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_BOOL'
+              [0016, 0008] (0034,           CONST_BOOL) {true}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+              [0016, 0012] (0021,            FECHA_PAR) {)}
+  17          {
+          Bloco = '{' Sentencas '}'
+              [0017, 0008] (0024,           ABRE_CHAVE) {{}
+  18  			n3 = n1 + n2;
+          Sentencas = ChamadaFuncOuAtrib Sentencas
+              [0018, 0003] (0001,                   ID) {n3}
+          ChamadaFuncOrAtrib = ExpAtrib
+          ExpAtrib = ArrId Atrib
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0018, 0006] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0018, 0008] (0001,                   ID) {n1}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = OpArit Tarit EaritX
+          OpArit = 'OP_ADD'
+              [0018, 0011] (0002,               OP_ADD) {+}
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0018, 0013] (0001,                   ID) {n2}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+              [0018, 0015] (0026,             TERMINAL) {;}
+  19  			if (n3 > n)
+          Sentencas = Cmd Sentencas
+          Cmd = 'if' '(' Ebool ')' Bloco Else
+              [0019, 0003] (0041,                PR_IF) {if}
+              [0019, 0006] (0020,             ABRE_PAR) {(}
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0019, 0007] (0001,                   ID) {n3}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = OpRelac Earit TrelacX
+          OpRelac = 'OP_MAIOR'
+              [0019, 0010] (0011,             OP_MAIOR) {>}
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0019, 0012] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+              [0019, 0013] (0021,            FECHA_PAR) {)}
+  20              {
+          Bloco = '{' Sentencas '}'
+              [0020, 0012] (0024,           ABRE_CHAVE) {{}
+  21  				return;
+          Sentencas = Cmd Sentencas
+          Sentencas = 'return' Return ';' Sentencas();
+              [0021, 0004] (0037,            PR_RETURN) {return}
+              [0021, 0010] (0026,             TERMINAL) {;}
+  22  			}
+          Sentencas = ε
+          Sentencas = ε
+              [0022, 0003] (0025,          FECHA_CHAVE) {}}
+  23  			write(sep, " ", n3);
+          Else = ε
+          Sentencas = Cmd Sentencas
+          Cmd = 'write' '(' ParamsChamada ')' ';'
+              [0023, 0003] (0039,             PR_WRITE) {write}
+              [0023, 0008] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0023, 0009] (0001,                   ID) {sep}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ',' ParamsChamada
+              [0023, 0012] (0027,                  SEP) {,}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = CteLiteral
+          CteLiteral = 'CONST_STRING'
+              [0023, 0014] (0033,         CONST_STRING) {" "}
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ',' ParamsChamada
+              [0023, 0017] (0027,                  SEP) {,}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0023, 0019] (0001,                   ID) {n3}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0023, 0021] (0021,            FECHA_PAR) {)}
+              [0023, 0022] (0026,             TERMINAL) {;}
+  24  			n1 = n2;
+          Sentencas = ChamadaFuncOuAtrib Sentencas
+              [0024, 0003] (0001,                   ID) {n1}
+          ChamadaFuncOrAtrib = ExpAtrib
+          ExpAtrib = ArrId Atrib
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0024, 0006] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0024, 0008] (0001,                   ID) {n2}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+              [0024, 0010] (0026,             TERMINAL) {;}
+  25  			n2 = n3;
+          Sentencas = ChamadaFuncOuAtrib Sentencas
+              [0025, 0003] (0001,                   ID) {n2}
+          ChamadaFuncOrAtrib = ExpAtrib
+          ExpAtrib = ArrId Atrib
+          ArrId = ε
+          Atrib = '=' EconcOuListArr
+              [0025, 0006] (0017,               OP_ATR) {=}
+          EconcOuListArr = Econc
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0025, 0008] (0001,                   ID) {n3}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+              [0025, 0010] (0026,             TERMINAL) {;}
+  26  		}
+          Sentencas = ε
+              [0026, 0002] (0025,          FECHA_CHAVE) {}}
+  27  	}
+          Sentencas = ε
+              [0027, 0001] (0025,          FECHA_CHAVE) {}}
+  28  }
+          Sentencas = ε
+              [0028, 0000] (0025,          FECHA_CHAVE) {}}
+  29  function void main()
+          S = DecFunc
+          DecFunc = 'function' TipoFunc NomeFunc '(' ParamsDec ')' Bloco
+              [0029, 0000] (0035,          PR_FUNCTION) {function}
+          TypeOrVoid = 'void'
+              [0029, 0009] (0052,            TIPO_VOID) {void}
+          NomeFunc = 'main'
+              [0029, 0014] (0036,              PR_MAIN) {main}
+              [0029, 0018] (0020,             ABRE_PAR) {(}
+          ParamsDec = ε
+              [0029, 0019] (0021,            FECHA_PAR) {)}
+  30  {
+          Bloco = '{' Sentencas '}'
+              [0030, 0000] (0024,           ABRE_CHAVE) {{}
+  31  	int n;
+          Sentencas = DecVar Sentencas
+          DecVar = Tipo ListId ';'
+          Tipo = 'int'
+              [0031, 0001] (0047,             TIPO_INT) {int}
+          ListId = AtribOuId ListIdX
+          AribOuId = 'id' ArrId Atrib
+              [0031, 0005] (0001,                   ID) {n}
+          ArrId = ε
+          Atrib = ε
+          ListIdX = ε
+              [0031, 0006] (0026,             TERMINAL) {;}
+  32  	input(n);
+          Sentencas = Cmd Sentencas
+          Cmd = input '(' LId ')' ';'
+              [0032, 0001] (0038,             PR_INPUT) {input}
+              [0032, 0006] (0020,             ABRE_PAR) {(}
+          LId = Id LIdX
+          Id = 'id' ArrId
+              [0032, 0007] (0001,                   ID) {n}
+          ArrId = ε
+          LIdX = ε
+              [0032, 0008] (0021,            FECHA_PAR) {)}
+              [0032, 0009] (0026,             TERMINAL) {;}
+  33  	fibonacci(n);
+          Sentencas = ChamadaFuncOuAtrib Sentencas
+              [0033, 0001] (0001,                   ID) {fibonacci}
+          ChamadaFuncOrAtrib = ChamadaFunc
+              [0033, 0010] (0020,             ABRE_PAR) {(}
+          ChamadaFunc = '(' ParamsChamada ')' ';'
+              [0033, 0010] (0020,             ABRE_PAR) {(}
+          ParamsChamada = Econc ParamsChamadaX
+          Econc = Ebool EconcX
+          Ebool = Tbool EboolX
+          Tbool = Fbool TboolX
+          Fbool = Trelac
+          Trleac = Earit TrelacX
+          Earit = Tarit EaritX
+          Tarit = Parit TaritX
+          Parit = Farit ParitX
+          Farit = FaritX
+          FaritX = IdOuFunc
+          IdOuFunc = 'id' ChamadaFuncOrArr
+              [0033, 0011] (0001,                   ID) {n}
+          ChamadaFunOrArr = ε
+          ParitX = ε
+          TaritX = ε
+          EaritX = ε
+          TrelacX = ε
+          TboolX = ε
+          EboolX = ε
+          EconcX = ε
+          ParamsChamadaX = ε
+              [0033, 0012] (0021,            FECHA_PAR) {)}
+              [0033, 0013] (0026,             TERMINAL) {;}
+  34  }
+          Sentencas = ε
+              [0034, 0000] (0025,          FECHA_CHAVE) {}}
+  35  
+          S = ε
+              [0035, 0001] (0029,            EOF_TOKEN) {EOF}
