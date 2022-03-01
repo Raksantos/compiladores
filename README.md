@@ -23,3 +23,6 @@ Como solicitado na primeira parte do projeto, temos os programas "fibonacci.jorg
 - Gabriel Luiz Leite Souza
 - João Victor Falcão Santos Lima
 - Rodrigo Santos da Silva
+
+# Vídeo de Apresentação
+https://bit.ly/ProjAB2
