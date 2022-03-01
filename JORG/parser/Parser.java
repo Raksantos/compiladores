@@ -24,7 +24,7 @@ public class Parser {
             lexicalScanner.nextRow();
             
             line = scanner.nextLine();
-            lineRow = "%04d  ";
+            lineRow = "%4d  ";
             
             System.out.printf(String.format(lineRow, lexicalScanner.getRow()));
             System.out.println(line);
@@ -35,9 +35,10 @@ public class Parser {
             getNextToken();
 
         }else{
-            lineRow = "%04d  ";
-            
+            lexicalScanner.nextRow();
+            lineRow = "%4d  ";
             System.out.printf(String.format(lineRow, lexicalScanner.getRow()));
+            System.out.println();
             currentToken = new Token("EOF", TokenCategory.EOF_TOKEN, lexicalScanner.getRow(), lexicalScanner.getColumn());
 
             currentTokenCategory = currentToken.getTokenCategory();
@@ -68,7 +69,7 @@ public class Parser {
         }
 
         line = scanner.nextLine();
-        lineRow = "%04d  ";
+        lineRow = "%4d  ";
         System.out.printf(String.format(lineRow, lexicalScanner.getRow()));
         System.out.println(line);
 
@@ -99,7 +100,7 @@ public class Parser {
             S();
         }else if(currentTokenCategory == TokenCategory.EOF_TOKEN){
             //Fim de arquivo
-            printProduction("S", "épsilon");
+            printProduction("S", "ε");
             System.out.println(currentToken.toString());
         }else{
             //Tipagem ou declaração esperada
@@ -109,13 +110,13 @@ public class Parser {
 
     public void Atrib(){
         if(currentTokenCategory == TokenCategory.OP_ATR) {
-            printProduction("Atrib", "= EconcOuListArr");
+            printProduction("Atrib", "'=' EconcOuListArr");
             System.out.println(currentToken.toString());
             getNextToken();
             EconcOuListArr();
         }
         else {
-            printProduction("Atrib", "épsilon");
+            printProduction("Atrib", "ε");
         }
     }
 
@@ -135,7 +136,7 @@ public class Parser {
             printProduction("EconcOuListArr", "Econc");
             Econc();
         }else if(currentTokenCategory == TokenCategory.ABRE_COL){
-            printProduction("EconcOuListArr", "Econc");
+            printProduction("EconcOuListArr", "ListArr");
             System.out.println(currentToken.toString());
             getNextToken();
             ListArr();
@@ -164,7 +165,7 @@ public class Parser {
             getNextToken();
             ListArr();
         }else{
-            printProduction("ListArrX", "épsilon");
+            printProduction("ListArrX", "ε");
         }
     }
     
@@ -223,7 +224,7 @@ public class Parser {
             getNextToken();
             ListId();
         }else{
-            printProduction("ListIdX", "épsilon");
+            printProduction("ListIdX", "ε");
         }
     }
 
@@ -280,6 +281,7 @@ public class Parser {
             getNextToken();
 
             if(currentTokenCategory == TokenCategory.ID){
+                System.out.println(currentToken.toString());
                 getNextToken();
                 Arr();
                 ParamsDecX();
@@ -287,7 +289,7 @@ public class Parser {
                 tokenExpected("'id'");
             }
         }else{
-            printProduction("ParamsDec", "épsilon");
+            printProduction("ParamsDec", "ε");
         }
     }
 
@@ -300,7 +302,7 @@ public class Parser {
 
             ParamsDec();
         }else{
-            printProduction("ParamsDecX", "épsilon");
+            printProduction("ParamsDecX", "ε");
         }
     }
 
@@ -372,25 +374,27 @@ public class Parser {
             Cmd();
             Sentencas();
         }else {
-            printProduction("Sentencas", "'épsilon'");
+            printProduction("Sentencas", "ε");
         }
     }
 
     public void Cmd(){
         if(currentTokenCategory == TokenCategory.PR_INPUT) {
             printProduction("Cmd", "input '(' LId ')' ';'");
-
+            System.out.println(currentToken.toString());
             getNextToken();
             
             if(currentTokenCategory == TokenCategory.ABRE_PAR){
                 LId();
-
+                System.out.println(currentToken.toString());
                 getNextToken();
 
                 if(currentTokenCategory == TokenCategory.FECHA_PAR){
+                    System.out.println(currentToken.toString());
                     getNextToken();
 
                     if(currentTokenCategory == TokenCategory.TERMINAL){
+                        System.out.println(currentToken.toString());
                         getNextToken();
                     }else{
                         tokenExpected("';'");
@@ -403,7 +407,7 @@ public class Parser {
             }
 
         }else if(currentTokenCategory == TokenCategory.PR_WRITE){
-            printProduction("Cmd", "write '(' ParamsChamada ')' ';'");
+            printProduction("Cmd", "'write' '(' ParamsChamada ')' ';'");
             System.out.println(currentToken.toString());
 
             getNextToken();
@@ -429,7 +433,7 @@ public class Parser {
             }
 
         }else if(currentTokenCategory == TokenCategory.PR_WRITELN){
-            printProduction("Cmd", "writeln '(' ParamsChamada ')' ';'");
+            printProduction("Cmd", "'writeln' '(' ParamsChamada ')' ';'");
             System.out.println(currentToken.toString());
 
             getNextToken();
@@ -455,16 +459,18 @@ public class Parser {
                 }
             }
         }else if(currentTokenCategory == TokenCategory.PR_IF) {
-            printProduction("Cmd", "‘if’ '(' Ebool ')' Bloco Else");
-            
+            printProduction("Cmd", "'if' '(' Ebool ')' Bloco Else");
+            System.out.println(currentToken.toString());
             getNextToken();
 
             if(currentTokenCategory == TokenCategory.ABRE_PAR){
+                System.out.println(currentToken.toString());
                 getNextToken();
 
                 Ebool();
 
                 if(currentTokenCategory == TokenCategory.FECHA_PAR){
+                    System.out.println(currentToken.toString());
                     getNextToken();
 
                     Bloco();
@@ -477,14 +483,16 @@ public class Parser {
             }
         }
         else if(currentTokenCategory == TokenCategory.PR_WHILE) {
-            printProduction("Cmd", "‘while’ '(' Ebool ')' Bloco");
+            printProduction("Cmd", "'while' '(' Ebool ')' Bloco");
             System.out.println(currentToken.toString());
             getNextToken();
             if(currentTokenCategory == TokenCategory.ABRE_PAR){
+                System.out.println(currentToken.toString());
                 getNextToken();
                 Ebool();
 
                 if(currentTokenCategory == TokenCategory.FECHA_PAR){
+                    System.out.println(currentToken.toString());
                     getNextToken();
                     Bloco();
                 }else{
@@ -495,7 +503,7 @@ public class Parser {
             }
         }
         else if(currentTokenCategory == TokenCategory.PR_FOR) {
-            printProduction("Cmd", "‘for’ '(' Int ',' Int ',' Int Incr ')' Bloco");
+            printProduction("Cmd", "'for' '(' Int ',' Int ',' Int Incr ')' Bloco");
             
             System.out.println(currentToken.toString());
             getNextToken();
@@ -580,6 +588,7 @@ public class Parser {
             Ret();
 
             if(currentTokenCategory == TokenCategory.TERMINAL){
+                System.out.println(currentToken.toString());
                 getNextToken();
             }else{
                 tokenExpected("';'");
@@ -592,7 +601,7 @@ public class Parser {
             printProduction("Ret", "Econc");
             Econc();
         }else{
-            printProduction("Ret", "épsilon");
+            printProduction("Ret", "ε");
         }
     }
 
@@ -629,7 +638,7 @@ public class Parser {
 
             Int();
         }else{
-            printProduction("Incr", "épsilon");
+            printProduction("Incr", "ε");
             getNextToken();
         }
     }
@@ -646,7 +655,7 @@ public class Parser {
             getNextToken();
             Bloco();
         }else{
-            printProduction("Else", "épsilon");
+            printProduction("Else", "ε");
         }
     }
 
@@ -660,10 +669,11 @@ public class Parser {
     public void LIdX(){
         if(currentTokenCategory == TokenCategory.SEP){
             printProduction("LIdX", "',' LId");
+            System.out.println(currentToken.toString());
             getNextToken();
             LId();
         }else{
-            printProduction("LIdX", "épsilon");
+            printProduction("LIdX", "ε");
         }
     }
 
@@ -680,7 +690,7 @@ public class Parser {
                 tokenExpected("']'");
             }
         }else{
-            printProduction("Arr", "épsilon");
+            printProduction("Arr", "ε");
         }
     }
 
@@ -697,7 +707,7 @@ public class Parser {
                 tokenExpected("']'");
             }
         }else{
-            printProduction("ArrId", "'épsilon'");
+            printProduction("ArrId", "ε");
         }
     }
 
@@ -720,16 +730,18 @@ public class Parser {
             Parit();
             TaritX();
         }else{
-            printProduction("TaritX", "épsilon");
+            printProduction("TaritX", "ε");
         }
     }
 
     public void OpMult(){
         if(currentTokenCategory == TokenCategory.OP_MULT){
             printProduction("OpMult", "OP_MULT");
+            System.out.println(currentToken.toString());
             getNextToken();
         }else if(currentTokenCategory == TokenCategory.OP_DIV){
             printProduction("OpMult", "OP_DIV");
+            System.out.println(currentToken.toString());
             getNextToken();
         }
     }
@@ -746,16 +758,18 @@ public class Parser {
             OpPot();
             Parit();
         }else{
-            printProduction("Parit", "épsilon");
+            printProduction("ParitX", "ε");
         }
     }
 
     public void OpPot(){
         if(currentTokenCategory == TokenCategory.OP_POT){
-            printProduction("OpPot", "OP_POT");
+            printProduction("OpPot", "'**'");
+            System.out.println(currentToken.toString());
             getNextToken();
         }else if(currentTokenCategory == TokenCategory.OP_MOD){
-            printProduction("OpPot", "OP_MOD");
+            printProduction("OpPot", "'%'");
+            System.out.println(currentToken.toString());
             getNextToken();
         }
     }
@@ -766,6 +780,7 @@ public class Parser {
             OpArit();
             FaritX();
         }else{
+            printProduction("Farit", "FaritX");
             FaritX();
         }
     }
@@ -783,7 +798,7 @@ public class Parser {
 
         }else if(currentTokenCategory == TokenCategory.ABRE_PAR){
             printProduction("FaritX", "'(' Econc ')'");
-            
+            System.out.println(currentToken.toString());
             getNextToken();
             Econc();
 
@@ -794,12 +809,15 @@ public class Parser {
                 tokenExpected("')'");
             }
         }else if(currentTokenCategory == TokenCategory.OP_SIZE){
+            printProduction("FaritX", "'size' 'id'");
             System.out.println(currentToken.toString());
             getNextToken();
 
             if(currentTokenCategory == TokenCategory.ID){
                 System.out.println(currentToken.toString());
                 getNextToken();
+            } else {
+                tokenExpected("'id'");
             }
         }
     }
@@ -818,7 +836,7 @@ public class Parser {
             Ebool();
             EconcX();
         }else{
-            printProduction("EconcX", "épsilon");
+            printProduction("EconcX", "ε");
         }
     }
 
@@ -836,7 +854,7 @@ public class Parser {
             Tbool();
             EboolX();
         }else{
-            printProduction("EboolX", "épsilon");
+            printProduction("EboolX", "ε");
         }
     }
 
@@ -854,7 +872,7 @@ public class Parser {
             Fbool();
             TboolX();
         }else{
-            printProduction("TboolX", "épsilon"); 
+            printProduction("TboolX", "ε"); 
         }
     }
 
@@ -883,7 +901,7 @@ public class Parser {
             Earit();
             TrelacX();
         }else{
-            printProduction("TrelacX", "épsilon");
+            printProduction("TrelacX", "ε");
         }
     }
 
@@ -945,10 +963,9 @@ public class Parser {
 
     public void IdOuFunc(){
         if(currentTokenCategory == TokenCategory.ID){
-            printProduction("IdOuFunc", "'id ChamadaFuncOrArr'");
+            printProduction("IdOuFunc", "'id' ChamadaFuncOrArr");
             System.out.println(currentToken.toString());
             getNextToken();
-            System.out.println(currentToken.toString());
             ChamadaFuncOrArr();
         }
     }
@@ -956,6 +973,7 @@ public class Parser {
     public void ChamadaFuncOuAtrib(){
         if(currentTokenCategory ==  TokenCategory.ABRE_PAR){
             printProduction("ChamadaFuncOrAtrib", "ChamadaFunc");
+            System.out.println(currentToken.toString());
             ChamadaFunc();
         }else if(currentTokenCategory == TokenCategory.OP_ATR || currentTokenCategory == TokenCategory.ABRE_COL){
             printProduction("ChamadaFuncOrAtrib", "ExpAtrib");
@@ -1001,24 +1019,30 @@ public class Parser {
 
     public void ChamadaFuncOrArr(){
         if(currentTokenCategory == TokenCategory.ABRE_PAR){
+            printProduction("ChamadaFuncOrArr", "'(' ParamsChamada ')'");
+            System.out.println(currentToken.toString());
             getNextToken();
             ParamsChamada();
 
             if(currentTokenCategory == TokenCategory.FECHA_PAR){
+                System.out.println(currentToken.toString());
                 getNextToken();
             }else{
                 tokenExpected("')'");
             }
         }else if(currentTokenCategory == TokenCategory.ABRE_COL){
+            printProduction("ChamadaFuncOrArr", "'[' Earit ']'");
+            System.out.println(currentToken.toString());
             getNextToken();
             Earit();
             if(currentTokenCategory == TokenCategory.FECHA_COL){
+                System.out.println(currentToken.toString());
                 getNextToken();
             }else{
                 tokenExpected("']'");
             }
         }else{
-            printProduction("ChamadaFunOrArr", "épsilon");
+            printProduction("ChamadaFunOrArr", "ε");
         }
     }
 
@@ -1028,7 +1052,7 @@ public class Parser {
             Econc();
             ParamsChamadaX();
         }else{
-            printProduction("ParamsChamada", "épsilon");
+            printProduction("ParamsChamada", "ε");
         }
     }
 
@@ -1036,12 +1060,11 @@ public class Parser {
         if(currentTokenCategory == TokenCategory.SEP){
             printProduction("ParamsChamadaX", "',' ParamsChamada");
             System.out.println(currentToken.toString());
-
             getNextToken();
             
             ParamsChamada();
         }else{
-            printProduction("ParamsChamadaX", "épsilon");
+            printProduction("ParamsChamadaX", "ε");
         }
     }
 
@@ -1064,7 +1087,7 @@ public class Parser {
             Tarit();
             EaritX();
         }else{
-            printProduction("EaritX", "épsilon");
+            printProduction("EaritX", "ε");
         }
     }
 
